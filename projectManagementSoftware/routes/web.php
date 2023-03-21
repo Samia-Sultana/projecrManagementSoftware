@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +27,30 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+// View all projects
+Route::get('/project', [ProjectController::class, 'show'])->name('project');
+// Create a project
+Route::post('/project/create', [ProjectController::class, 'store']);
+// Update Project
+Route::post('/project/update', [ProjectController::class, 'update']);
+// Delete a project
+Route::post('/project/delete', [ProjectController::class, 'destroy']);
+
+Route::get('/project/detail/{id}', [ProjectController::class, 'detail'])->name('projectDetail');
+
+Route::get('project/{id1}/milestone/detail/{id2}', [MilestoneController::class, 'detail'])->name('milestoneDetail');
+
+// View all milestone
+Route::get('/milestone/all', [MilestoneController::class, 'show'])->name('milestone');
+// Create a milestone
+Route::post('/milestone/create', [MilestoneController::class, 'create']);
+// Update milestone
+Route::post('/milestone/update', [MilestoneController::class, 'update']);
+// Delete milestone
+Route::post('/milestone/delete', [MilestoneController::class, 'destroy']);
+
 });
 
 require __DIR__.'/auth.php';
