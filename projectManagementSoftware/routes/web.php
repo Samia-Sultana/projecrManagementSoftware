@@ -32,9 +32,9 @@ Route::middleware('auth')->group(function () {
 // View all projects
 Route::get('/project', [ProjectController::class, 'show'])->name('project');
 // Create a project
-Route::post('/project/create', [ProjectController::class, 'store']);
+Route::post('/project/create', [ProjectController::class, 'store'])->name('createProject');
 // Update Project
-Route::post('/project/update', [ProjectController::class, 'update']);
+Route::post('/project/update', [ProjectController::class, 'update'])->name('updateProject');
 // Delete a project
 Route::post('/project/delete', [ProjectController::class, 'destroy']);
 
